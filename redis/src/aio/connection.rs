@@ -366,6 +366,7 @@ async fn get_socket_addrs(
     host: &str,
     port: u16,
 ) -> RedisResult<impl Iterator<Item = SocketAddr> + Send + '_> {
+    // MEMO: access tokio apis
     #[cfg(feature = "tokio-comp")]
     let socket_addrs = lookup_host((host, port)).await?;
     #[cfg(all(not(feature = "tokio-comp"), feature = "async-std-comp"))]
